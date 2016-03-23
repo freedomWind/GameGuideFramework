@@ -1,0 +1,67 @@
+        //指引的步骤数据结构 isText表示需要显示文字， flag1为true表示为
+        public class StepData
+        {
+          public int stepID;  //步骤id
+          public string targetPath;  //目标按钮的路径
+          public int lastStepID;
+          public int nextStepID;
+          public string stepWaitID = "";
+          public int width;
+          public int height;
+          public int offset_x;  //x的修正
+          public int offset_y;  //y的修正
+          public TipType tipObjType;
+          public bool isText;
+          public bool flag1;
+          public int flag2;
+          public string flag3;
+        
+          public StepDataXml TurnToStepdataXml()
+          {
+              StepDataXml dataxml = new StepDataXml();
+              dataxml.stepID = this.stepID.ToString();
+              dataxml.targetPath = this.targetPath;
+              dataxml.lastStepID = this.lastStepID.ToString() ;
+              dataxml.nextStepID = this.nextStepID.ToString();
+              dataxml.stepWaitID = this.stepWaitID;
+              dataxml.width = this.width.ToString();
+              dataxml.height = this.height.ToString();
+              dataxml.offset_x = this.offset_x.ToString();
+              dataxml.offset_y = this.offset_y.ToString();
+              dataxml.isText = this.isText.ToString();
+              dataxml.tipObjType = this.tipObjType.ToString();
+              dataxml.flag1 = this.flag1.ToString();
+              dataxml.flag2 = this.flag2.ToString();
+              dataxml.flag3 =  this.flag3;
+              return dataxml;
+          }
+        
+          public string GetTiptext_1()
+          {
+              if (isText)
+              {
+                  char[] split = new char[1];
+                  split[0] = '/';
+                  string[] str = LauguageTool.GetIns().GetText("guideTip_" + stepID).Split(split);
+                  return str[0];
+              }
+              else
+                  return "";
+              }
+          public string GetTiptext_2()
+          {
+              if (isText)
+              {
+                  char[] split = new char[1];
+                  split[0] = '/';
+                  string[] str = LauguageTool.GetIns().GetText("guideTip_" + stepID).Split(split);
+                  if (str.Length > 2)
+                  {
+                      return str[1];
+                  }
+                  return "";
+              }
+              else
+                  return "";
+          }
+        }
